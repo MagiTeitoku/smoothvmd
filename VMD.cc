@@ -296,22 +296,24 @@ void VMD_Frame::set_interpolation_y(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t 
 void VMD_Frame::set_interpolation_z(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2)
 {
   uint8_t* ip = interpolation;
+  uint8_t physicsDisabled_lower = ip[2];
   ip[ 2] = ip[17] = ip[32] = x1; // Z_x1
   ip[ 6] = ip[21] = ip[36] = ip[51] = y1; // Z_y1
   ip[10] = ip[25] = ip[40] = ip[55] = x2; // Z_x2
   ip[14] = ip[29] = ip[44] = ip[59] = y2; // Z_y2
 
-  ip[2] = 0; // MMD 9.31では0になっている
+  ip[2] = physicsDisabled_lower; // MMD 9.31では物理OFFフラグ（下位バイト）
 }
 
 void VMD_Frame::set_interpolation_r(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2)
 {
   uint8_t* ip = interpolation;
+  uint8_t physicsDisabled_upper = ip[3];
   ip[ 3] = ip[18] = ip[33] = ip[48] = x1; // R_x1
   ip[ 7] = ip[22] = ip[37] = ip[52] = y1; // R_y1
   ip[11] = ip[26] = ip[41] = ip[56] = x2; // R_x2
   ip[15] = ip[30] = ip[45] = ip[60] = y2; // R_y2
 
-  ip[3] = 0; // MMD 9.31では0になっている
+  ip[3] = physicsDisabled_upper; // MMD 9.31では物理OFFフラグ（上位バイト）
 }
 
