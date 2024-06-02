@@ -50,6 +50,8 @@ VMD_Frame make_intermediate_frame(const VMD_Frame& head_frame, const VMD_Frame& 
 {
   VMD_Frame f;
   memcpy(f.bonename, head_frame.bonename, f.bonename_len);
+  f.interpolation[2] = head_frame.interpolation[2];
+  f.interpolation[3] = head_frame.interpolation[3];
   if (bezier) {
     // ベジェ曲線補間
     const uint8_t* ip = tail_frame.interpolation;
